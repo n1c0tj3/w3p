@@ -19,12 +19,17 @@ namespace ShowW3p.Lib
             foreach (ManagementObject retObject in retObjectCollection)
             {
                 string commandline = retObject["CommandLine"] as string;
-                string[] cols = commandline.Split('-');
+                string appname = "?";
+                if (commandline != null)
+                {
+                    string[] cols = commandline.Split('-');
+                    appname = cols[1].Substring(3);
+                }
                 var pid = retObject["ProcessId"];
                 var p = new Process()
                 {
                     Pid = (uint)retObject["ProcessId"],
-                    Name = cols[1].Substring(3)
+                    Name = appname
                 };
                 result.Add(p);
             }
@@ -33,7 +38,7 @@ namespace ShowW3p.Lib
 
         public List<Process> FindProcess(string name, string remotemachine)
         {
-            if ( String.IsNullOrEmpty(remotemachine))
+            if (String.IsNullOrEmpty(remotemachine))
             {
                 return FindProcessOnLocalMachine(name);
             }
@@ -52,7 +57,7 @@ namespace ShowW3p.Lib
                 var p = new Process()
                 {
                     Pid = (uint)retObject["ProcessId"],
-                    Name = cols[1].Substring(3).Replace('"',' ' )
+                    Name = cols[1].Substring(3).Replace('"', ' ')
                 };
                 result.Add(p);
             }
