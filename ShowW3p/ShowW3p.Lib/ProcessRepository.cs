@@ -30,5 +30,29 @@ namespace ShowW3p.Lib
             }
             return result;
         }
+
+        public List<Process> FindProcess(string name, string remotemachine)
+        {
+            ManagementScope scope = new ManagementScope("\\\\" + remotemachine + "\\root\\cimv2");
+            scope.Connect();
+            var result = new List<Process>();
+            string wmiQuery = string.Format("select ProcessId, CommandLine from Win32_Process where Name='{0}'", name);
+            ObjectQuery query = new ObjectQuery(wmiQuery);
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query);
+            ManagementObjectCollection retObjectCollection = searcher.Get();
+            foreach (ManagementObject retObject in retObjectCollection)
+            {
+                string commandline = retObject["CommandLine"] as string;
+                string[] cols = commandline.Split('-');
+                var pid = retObject["ProcessId"];
+                var p = new Process()
+                {
+                    Pid = (uint)retObject["ProcessId"],
+                    Name = cols[1].Substring(3).Replace('"',' ' )
+                };
+                result.Add(p);
+            }
+            return result;
+        }
     }
 }
