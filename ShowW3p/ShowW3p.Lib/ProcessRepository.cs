@@ -10,7 +10,7 @@ namespace ShowW3p.Lib
 {
     public class ProcessRepository
     {
-        public List<Process> FindProcess(string name)
+        public List<Process> FindProcessOnLocalMachine(string name)
         {
             var result = new List<Process>();
             string wmiQuery = string.Format("select ProcessId, CommandLine from Win32_Process where Name='{0}'", name);
@@ -33,6 +33,10 @@ namespace ShowW3p.Lib
 
         public List<Process> FindProcess(string name, string remotemachine)
         {
+            if ( String.IsNullOrEmpty(remotemachine))
+            {
+                return FindProcessOnLocalMachine(name);
+            }
             ManagementScope scope = new ManagementScope("\\\\" + remotemachine + "\\root\\cimv2");
             scope.Connect();
             var result = new List<Process>();

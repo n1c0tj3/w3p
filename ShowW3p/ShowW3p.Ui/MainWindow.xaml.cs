@@ -30,7 +30,7 @@ namespace ShowW3p.Ui
         private void OK_Click(object sender, RoutedEventArgs e)
         {
             ProcessRepository rep = new ProcessRepository();
-            var proceslist = String.IsNullOrEmpty(txtMachine.Text)? rep.FindProcess(txtProces.Text) : rep.FindProcess(txtProces.Text, txtMachine.Text);
+            var proceslist = rep.FindProcess(txtProces.Text, txtMachine.Text);
             var result = (String.IsNullOrEmpty(txtNeedle.Text) ? proceslist : proceslist.Where(x => x.Name.ToLower().Contains(txtNeedle.Text.ToLower())));
             gridResult.ItemsSource = result;
             tabMenu.SelectedIndex = 1;
