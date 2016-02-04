@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowW3p", "ShowW3p\ShowW3p.csproj", "{7E0415A2-248C-4BD6-8073-FD743634A2C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowW3p.Lib", "ShowW3p.Lib\ShowW3p.Lib.csproj", "{67598FCE-F6C2-4676-B602-F4CC6C7BBFB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7E0415A2-248C-4BD6-8073-FD743634A2C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E0415A2-248C-4BD6-8073-FD743634A2C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E0415A2-248C-4BD6-8073-FD743634A2C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67598FCE-F6C2-4676-B602-F4CC6C7BBFB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67598FCE-F6C2-4676-B602-F4CC6C7BBFB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67598FCE-F6C2-4676-B602-F4CC6C7BBFB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67598FCE-F6C2-4676-B602-F4CC6C7BBFB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

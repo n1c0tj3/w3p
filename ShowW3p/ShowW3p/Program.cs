@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShowW3p.Lib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Management;
@@ -11,21 +12,13 @@ namespace ShowW3p
     {
         static void Main(string[] args)
         {
-            string proces = "w3wp.exe";
-            string wmiQuery = string.Format("select ProcessId, CommandLine from Win32_Process where Name='{0}'", proces);
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(wmiQuery);
-            ManagementObjectCollection retObjectCollection = searcher.Get();
-            foreach (ManagementObject retObject in retObjectCollection)
+            ProcessRepository rep = new ProcessRepository();
+            var name = "w3wp.exe";
+            var proceslist = rep.FindProcess(name);
+            Console.WriteLine(String.Format("Aantal {0} processen : {1}\n", name, proceslist.Count));
+            foreach (var item in proceslist)
             {
-                string commandline = retObject["CommandLine"] as string;
-                string[] cols = commandline.Split('-');
-                var pid = retObject["ProcessId"];
-
-                Console.WriteLine(String.Format("{0} : {1}", pid, cols[1]));
-            }
-            if (retObjectCollection.Count < 1)
-            {
-                Console.WriteLine(String.Format("Er zijn geen {0} processen gevonden.", proces));
+                Console.WriteLine(String.Format("{0} : {1}", item.Pid, item.Name));
             }
             Console.ReadKey();
         }
